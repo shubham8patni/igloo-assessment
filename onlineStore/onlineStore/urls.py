@@ -26,4 +26,5 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('users/', include('users.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]

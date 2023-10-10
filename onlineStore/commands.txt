@@ -1,0 +1,8 @@
+to start celery worker
+celery -A onlineStore worker -l info
+
+to start rabbitmq
+sudo systemctl start rabbitmq-server
+
+to stop rabbitmq
+sudo systemctl stop rabbitmq-server

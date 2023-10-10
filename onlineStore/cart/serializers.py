@@ -25,3 +25,9 @@ class GetcartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ['product', 'quantity_of_product']
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        product_data = data.pop('product')
+        data.update(product_data)
+        return data
