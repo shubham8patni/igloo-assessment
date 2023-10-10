@@ -26,6 +26,7 @@ class cart(APIView):
         # r.delete(f"{user}")
         #### CACHE ####
         cached_data = r.hgetall(f"{user}")
+        print(cached_data, "="*100)
         if cached_data is {}:
             resp = primary_cache(r, user)
             
@@ -168,7 +169,9 @@ class cart(APIView):
             elif existing_prod.quantity_of_product == 1:
                 existing_prod.delete()
                 #### CACHE ####
-                r.delete(f"{user}")
+                serialized_data = GetcartSerializer(existing_prod)
+                # cached_prod = r.hmget(f"{user}", f"product {request.data['product_id']}")
+                r.hdel(f"{user}", f"product {request.data['product_id']}")
             return Response({
                         'status': 204,
                     })
